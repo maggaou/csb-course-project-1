@@ -1,0 +1,16 @@
+<h2>Login</h2>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<p>ℹ️ <kbd>Enter</kbd> can be used to send the form</p>
+<form action="{% url 'login' %}" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+  <button type="submit">Send</button>
+  <p>Don't have an account? <a href="{%url 'register' %}">Register</a></p>
+</form>

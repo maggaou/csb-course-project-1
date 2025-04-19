@@ -1,0 +1,40 @@
+<h2>{{ reservation.date }}</h2>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<a href="{% url 'add' %}?id={{reservation.id}}">Edit reservation</a>
+<table>
+    <tr>
+        <th>Details</th>
+        <!-- <td>{{ reservation.details|safe }}</td> -->
+        <td>{{ reservation.details }}</td>
+    </tr>
+    <tr>
+        <th>Duration</th>
+        <td>{{ reservation.duration }} min</td>
+    </tr>
+    <tr>
+        <th>Number of participants</th>
+        <td>{{ reservation.numberOfparticipants }}</td>
+    </tr>
+    <tr>
+        <th>Created by</th>
+        <td>{{ reservation.owner }}</td>
+    </tr>
+    <tr>
+        <th>Creation date</th>
+        <td>{{ reservation.created }}</td>
+    </tr>
+    <tr>
+        <th>Last modified</th>
+        <td>{{ reservation.last_modified }}</td>
+    </tr>
+</table>
+<hr>
+<a href="{% url 'index' %}">Back to main page</a>

@@ -1,0 +1,27 @@
+{% if edit %}
+<h2>Edit reservation 🦭</h2>
+{% endif %}
+
+{% if not edit %}
+<h2>Make a new reservation 🧚‍♂️</h2>
+{% endif %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<hr>
+<p>ℹ️ Use date format <code>2006-10-25 14:30</code></p>
+<p>ℹ️ <kbd>Enter</kbd> can be used to send the form</p>
+
+<form action={% if edit %}"{% url 'edit' %}"{% else %}{% url 'add' %}{% endif %} method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+<hr>
+<a href="{% url 'index' %}">Back to main page</a>

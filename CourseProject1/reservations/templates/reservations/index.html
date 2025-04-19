@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Reservations App</title>
+    </head>
+
+    <body>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <h1>Reservations Web App 👊</h1>
+
+        {% if user.is_authenticated %}
+        <p>Welcome {{ user }}!</p>
+        {% endif %}
+
+        {% if not user.is_authenticated %}
+        <p>Welcome! <a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a></p>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <h2>My reservations</h2>
+        <ul>
+            {% for item in reservations %}
+            <li><a href="{% url 'view' %}?id={{item.id}}">{{item.date}} ({{item.duration}} min)</a></li>
+            {% endfor %}
+		</ul>
+        {% endif %}
+
+        <h2>Make reservations</h2>
+
+        <p><a href="{% url 'add' %}">Click here</a></p>
+    </body>
+</html>
